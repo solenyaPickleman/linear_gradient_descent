@@ -1,11 +1,9 @@
-{-# LANGUAGE ViewPatterns #-}
 import Numeric.LinearAlgebra.HMatrix
 import Text.CSV
-import Data.Maybe (fromMaybe)
 import Data.Either
 
 -- Normalize an array 
-normalize :: ( Fractional a)  => [a] -> a -> a -> [a]
+-- normalize :: ( Fractional a)  => [a] -> a -> a -> [a]
 normalize arr minval maxval = map (func) arr
     where 
         func x = (x - minval) / (maxval - minval)
@@ -19,7 +17,7 @@ denormalize arr minval maxval = map (func) arr
 getweights weights = print (weights)
      
 --using batch gradient descent to minimize function (in this case mean squared error) for a linear function (mx + b)
-linear_descent ::  Matrix Double -> Matrix Double -> Matrix Double ->  Double ->   Double ->  Double ->  (Matrix  Double, Double)
+-- linear_descent ::  Matrix Double -> Matrix Double -> Matrix Double ->  Double ->   Double ->  Double ->  (Matrix  Double, Double)
 linear_descent x y weights offset error  iters 
     | iters > 10000 = (weights ,  offset)
     | error < error_goal &&  error  /=  0    =  (weights,  offset)
