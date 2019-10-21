@@ -7,14 +7,6 @@ import Data.Either
 normalize arr minval maxval = map (func) arr
     where 
         func x = (x - minval) / (maxval - minval)
-
---denormalize an already normalized arrays
-denormalize :: ( Fractional a)  => [a] -> a -> a -> [a]
-denormalize arr minval maxval = map (func) arr
-    where 
-        func x = x * (maxval-minval) + minval
-
-getweights weights = print (weights)
      
 --using batch gradient descent to minimize function (in this case mean squared error) for a linear function (mx + b)
 -- linear_descent ::  Matrix Double -> Matrix Double -> Matrix Double ->  Double ->   Double ->  Double ->  (Matrix  Double, Double)
