@@ -53,12 +53,10 @@ main =  do
             let do_normalizing arr = normalize arr (minimum arr) (maximum arr)
             let normalized_values = map do_normalizing to_normalize
             let x= tr ( fromLists normalized_values ) :: Matrix Double
-
             let y1 =  value_matrix ?? (All, TakeLast 1)
             --let y1 = matrix 1 (do_normalizing (toLists (tr y) !! 0) ) :: Matrix Double
             let  avg x = sum  x / realToFrac (length x)
             let weights = ((rows x) >< (cols x)) (take (rows x * cols x) (cycle (map avg (toLists (tr x)))))  :: Matrix Double
             let offset = 1
-            print (keys)
             let (w, o) = linear_descent x y1 weights offset 0.5 0
-            print ("results", (w ?? (Take 1, All), o))
+            print ("results", sumElements (y1 - (matrix 1 ( map (+o) (map sum (toLists (w*x)))))))
